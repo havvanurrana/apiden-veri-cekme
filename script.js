@@ -1,4 +1,3 @@
-// DOM Elemanlarını Global Olarak Seçme
 const container = document.getElementById("container");
 const modal = document.getElementById("product-modal");
 const closeModalButton = document.getElementById("close-btn");
@@ -8,10 +7,8 @@ const modalDescription = document.getElementById("modal-description");
 const modalPrice = document.getElementById("modal-price");
 const modalStars = document.getElementById("modal-stars");
 
-// Ürünleri Depolamak için Boş Dizi
 let products = [];
 
-// API'den Ürünleri Çekme Fonksiyonu
 async function fetchProducts() {
     try {
         const response = await fetch("https://fakestoreapi.com/products");
@@ -23,9 +20,8 @@ async function fetchProducts() {
     }
 }
 
-// Ürün Kartlarını Oluşturma ve Ekleme Fonksiyonu
 function renderProductCards(products, container) {
-    container.innerHTML = ''; // Önceki kartları temizle
+    container.innerHTML = '';
 
     products.forEach(product => {
         const productCard = createProductCard(product);
@@ -33,7 +29,6 @@ function renderProductCards(products, container) {
     });
 }
 
-// Ürün Kartı Oluşturma Fonksiyonu
 function createProductCard(product) {
     const card = document.createElement("div");
     card.className = "cards";
@@ -67,7 +62,6 @@ function createProductCard(product) {
     return card;
 }
 
-// Yıldızları ve Puan Sayısını Oluşturma Fonksiyonu
 function createStars(rate, count) {
     const starsDiv = document.createElement("div");
     starsDiv.className = "stars";
@@ -96,7 +90,6 @@ function createStars(rate, count) {
     return starsDiv;
 }
 
-// Modalı Gösterme Fonksiyonu
 function showModal(product, modal, modalImage, modalName, modalDescription, modalPrice, modalStars) {
     modalImage.src = product.image;
     modalName.textContent = product.title;
@@ -110,13 +103,10 @@ function showModal(product, modal, modalImage, modalName, modalDescription, moda
     modal.style.display = "block";
 }
 
-// Modalı Kapatma Fonksiyonu
 function closeModal(modal) {
     modal.style.display = "none";
 }
 
-// Olay Dinleyicisi
 closeModalButton.addEventListener("click", () => closeModal(modal));
 
-// Sayfa Yüklendiğinde Ürünleri Getir
 fetchProducts();
